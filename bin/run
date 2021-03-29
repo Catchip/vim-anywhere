@@ -40,8 +40,8 @@ TMPFILE_DIR=/tmp/vim-anywhere
 TMPFILE=$TMPFILE_DIR/doc-$(date +"%y%m%d%H%M%S")
 VIM_OPTS=--nofork
 
-# Use ~/.gvimrc.min or ~/.vimrc.min if one exists
-VIMRC_PATH=($HOME/.gvimrc.min $HOME/.vimrc.min)
+# Use ~/.config/nvim/init.vim if one exists
+VIMRC_PATH=($HOME/.config/nvim/init.vim)
 
 for vimrc_path in "${VIMRC_PATH[@]}"; do
     if [ -f $vimrc_path ]; then
@@ -56,7 +56,7 @@ touch $TMPFILE
 # Linux
 if [[ $OSTYPE == "linux-gnu" ]]; then
   chmod o-r $TMPFILE # Make file only readable by you
-  gvim $VIM_OPTS $TMPFILE
+  nvim-wrapper $VIM_OPTS $TMPFILE
   cat $TMPFILE | xclip -selection clipboard
 
 # OSX
